@@ -41,6 +41,10 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 		writeErrorResponse(w, err)
 		return
 	} else {
+		if counter == nil {
+			writeErrorResponse(w, fmt.Errorf("counter is nil"))
+			return
+		}
 		if count, err := counter.IncrementAndGet(r.Context(), requestParams.Key); err != nil {
 			writeErrorResponse(w, err)
 		} else {
