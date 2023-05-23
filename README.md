@@ -18,8 +18,6 @@
 # Instructions.
 1. Create a free distributed Redis cache on Vercel using [this](https://vercel.com/storage/kv) link.
 2. Press the **Deploy** button to take your badge to the cloud!
-<br />
-<br />
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FMustansirZia%2Fmarkdown-visitor-badge&env=REDIS_HOST,REDIS_PORT,REDIS_USERNAME,REDIS_PASSWORD,REDIS_DATABASE,REDIS_USE_TLS&envDescription=Redis%20connection%20variables.)
 
@@ -39,3 +37,5 @@
 
 # Customization.
 The look and feel of the badge can be customised by providing a set of query params inside the markdown snippet as described in the below picture.
+
+![Customization](/static/3.jpeg)
