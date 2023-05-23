@@ -18,7 +18,8 @@ var parser requestParser.RequestParser
 
 // Handler - Handles the HTTP request.
 func Handler(w http.ResponseWriter, r *http.Request) {
-	if (r.URL.Path != "/" && r.URL.Path != "/api/index") || r.Method != http.MethodGet {
+	fmt.Println(r.URL.Path)
+	if (r.URL.Path != "/" && r.URL.Path != "/api/count") || r.Method != http.MethodGet {
 		writeNotFoundResponse(w)
 		return
 	}
