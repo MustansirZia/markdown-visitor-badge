@@ -20,6 +20,7 @@
 2. Press the **Deploy** button to take your badge to the cloud!
 <br />
 <br />
+
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FMustansirZia%2Fmarkdown-visitor-badge&env=REDIS_HOST,REDIS_PORT,REDIS_USERNAME,REDIS_PASSWORD,REDIS_DATABASE,REDIS_USE_TLS&envDescription=Redis%20connection%20variables.)
 
 3. In Vercel create project screen, you need to fill in all environment variables related to Redis. If you did step 1, you must already have them. You can bring your own Redis as well since the client used in the badge code is a generic Redis client which can connect to any datastore that supports Redis protocol.
