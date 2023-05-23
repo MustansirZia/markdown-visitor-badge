@@ -80,5 +80,6 @@ func (e *envConfig) Provide() (Config, error) {
 		return Config{}, errors.New(("REDIS_DATABASE is not a valid number"))
 	}
 	redisUseTLS := getEnvVarOrDefault("REDIS_USE_TLS", "false") == "true"
+	fmt.Fprintln(os.Stderr, Config{RedisHost: redisHost, RedisPort: uint32(redisPort), Port: uint32(port), RedisUsername: redisUsername, RedisPassword: redisPassword, RedisDatabase: uint32(redisDatabase), RedisUseTLS: redisUseTLS})
 	return Config{RedisHost: redisHost, RedisPort: uint32(redisPort), Port: uint32(port), RedisUsername: redisUsername, RedisPassword: redisPassword, RedisDatabase: uint32(redisDatabase), RedisUseTLS: redisUseTLS}, nil
 }
