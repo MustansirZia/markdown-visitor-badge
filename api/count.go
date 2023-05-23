@@ -73,18 +73,18 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 func writeBadRequestResponse(w http.ResponseWriter, err error) {
 	w.WriteHeader(http.StatusBadRequest)
 	w.Header().Set("Content-Type", "text/html")
-	fmt.Fprintlnf(w, "<h1>Bad Request/h1><br/>Details: %s", err.Error())
+	fmt.Fprintf(w, "<h1>Bad Request/h1><br/>Details: %s", err.Error())
 }
 
 func writeErrorResponse(w http.ResponseWriter, err error) {
 	fmt.Fprintln(os.Stderr, err.Error())
 	w.WriteHeader(http.StatusInternalServerError)
 	w.Header().Set("Content-Type", "text/html")
-	fmt.Fprintlnf(w, "<h1>Internal Server Error</h1><br/>Details: %s", err.Error())
+	fmt.Fprintf(w, "<h1>Internal Server Error</h1><br/>Details: %s", err.Error())
 }
 
 func writeNotFoundResponse(w http.ResponseWriter) {
 	w.WriteHeader(http.StatusNotFound)
 	w.Header().Set("Content-Type", "text/html")
-	fmt.Fprintln(w, "<h1>Not Found</h1><br/>Details: Nothing to see here.")
+	fmt.Fprintf(w, "<h1>Not Found</h1><br/>Details: Nothing to see here.")
 }
