@@ -25,7 +25,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	}
 	once.Do(func() {
 		if config, err := configProvider.NewConfigProvider().Provide(); err != nil {
-			fmt.Fprint(os.Stdout, "config")
+			fmt.Fprint(os.Stderr, "config")
 			writeErrorResponse(w, err)
 		} else {
 			counter = store.NewCounter(config)
@@ -38,17 +38,17 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 			writeBadRequestResponse(w, err)
 			return
 		}
-		fmt.Fprint(os.Stdout, "parser")
+		fmt.Fprint(os.Stderr, "parser")
 		writeErrorResponse(w, err)
 		return
 	} else {
 		if counter == nil {
-			fmt.Fprint(os.Stdout, "counter is nil")
+			fmt.Fprint(os.Stderr, "counter is nil")
 			writeErrorResponse(w, fmt.Errorf("counter is nil"))
 			return
 		}
 		if count, err := counter.IncrementAndGet(r.Context(), requestParams.Key); err != nil {
-			fmt.Fprint(os.Stdout, "increment")
+			fmt.Fprint(os.Stderr, "increment")
 			writeErrorResponse(w, err)
 		} else {
 			w.Header().Set("Content-Type", "image/svg+xml;")
@@ -63,7 +63,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 					LabelColor:   requestParams.LabelColor,
 				},
 			); err != nil {
-				fmt.Fprint(os.Stdout, "render")
+				fmt.Fprint(os.Stderr, "render")
 				writeErrorResponse(w, err)
 			}
 		}
@@ -77,7 +77,7 @@ func writeBadRequestResponse(w http.ResponseWriter, err error) {
 }
 
 func writeErrorResponse(w http.ResponseWriter, err error) {
-	fmt.Fprint(os.Stdout, err.Error())
+	fmt.Fprint(os.Stderr, err.Error())
 	w.WriteHeader(http.StatusInternalServerError)
 	w.Header().Set("Content-Type", "text/html")
 	fmt.Fprintf(w, "<h1>Internal Server Error</h1><br/>Details: %s", err.Error())
