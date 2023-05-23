@@ -43,6 +43,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 		return
 	} else {
 		if counter == nil {
+			fmt.Fprint(os.Stderr, "counter is nil")
 			writeErrorResponse(w, fmt.Errorf("counter is nil"))
 			return
 		}
