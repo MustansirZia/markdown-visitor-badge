@@ -19,6 +19,8 @@ type Config struct {
 	RedisPassword string
 	// RedisPassword - The logical database inside the Redis server.
 	RedisDatabase uint32
+	// RedisUseTLS - Whether to enable TLS for redis.
+	RedisUseTLS bool
 	// Port - The port on which application server will listen if deployed using main.go.
 	Port uint32
 }
@@ -77,5 +79,6 @@ func (e *envConfig) Provide() (Config, error) {
 	if err != nil {
 		return Config{}, errors.New(("REDIS_DATABASE is not a valid number"))
 	}
-	return Config{RedisHost: redisHost, RedisPort: uint32(redisPort), Port: uint32(port), RedisUsername: redisUsername, RedisPassword: redisPassword, RedisDatabase: uint32(redisDatabase)}, nil
+	redisUseTLS := getEnvVarOrDefault("REDIS_USE_TLS", "false") == "true"
+	return Config{RedisHost: redisHost, RedisPort: uint32(redisPort), Port: uint32(port), RedisUsername: redisUsername, RedisPassword: redisPassword, RedisDatabase: uint32(redisDatabase), RedisUseTLS: redisUseTLS}, nil
 }

@@ -2,6 +2,7 @@ package store
 
 import (
 	"context"
+	"crypto/tls"
 	"fmt"
 
 	"github.com/MustansirZia/markdown-visitor-badge/configProvider"
@@ -28,12 +29,17 @@ func (c *redisBasedCounter) IncrementAndGet(ctx context.Context, key string) (ui
 
 // NewCounter - Constructs and returns a new Counter.
 func NewCounter(config configProvider.Config) Counter {
+	var tlsConfig *tls.Config
+	if config.RedisUseTLS {
+		tlsConfig = &tls.Config{}
+	}
 	redisClient := redis.NewClient(&redis.Options{
-		Addr:     fmt.Sprintf("%s:%d", config.RedisHost, config.RedisPort),
-		Username: config.RedisUsername,
-		Password: config.RedisPassword,
-		DB:       int(config.RedisDatabase),
-		PoolSize: 1,
+		Addr:      fmt.Sprintf("%s:%d", config.RedisHost, config.RedisPort),
+		Username:  config.RedisUsername,
+		Password:  config.RedisPassword,
+		TLSConfig: tlsConfig,
+		DB:        0,
+		PoolSize:  1,
 	})
 	return &redisBasedCounter{redisClient: redisClient}
 }
