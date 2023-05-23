@@ -82,6 +82,6 @@ func (p queryParser) Parse(r *http.Request) (RequestParams, error) {
 	if !slices.Contains(validKeys, key) {
 		return RequestParams{}, ErrInvalidKey
 	}
-	badgeParams := RequestParams{Label: label, LabelColor: labelColor, LabelBgColor: labelBgColor, CountColor: countColor, CountBgColor: countBgColor, Key: key}
-	return badgeParams, nil
+	requestParams := RequestParams{Label: label, LabelColor: labelColor, LabelBgColor: labelBgColor, CountColor: countColor, CountBgColor: countBgColor, Key: key}
+	return requestParams, nil
 }

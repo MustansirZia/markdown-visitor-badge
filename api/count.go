@@ -3,6 +3,7 @@ package api
 import (
 	"fmt"
 	"net/http"
+	"os"
 	"sync"
 
 	"github.com/MustansirZia/markdown-visitor-badge/configProvider"
@@ -18,7 +19,7 @@ var parser requestParser.RequestParser
 
 // Handler - Handles the HTTP request.
 func Handler(w http.ResponseWriter, r *http.Request) {
-	fmt.Println(r.URL.Path)
+	fmt.Fprint(os.Stderr, r.URL.Path)
 	if (r.URL.Path != "/" && r.URL.Path != "/api/count") || r.Method != http.MethodGet {
 		writeNotFoundResponse(w)
 		return
@@ -44,8 +45,17 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 			writeErrorResponse(w, err)
 		} else {
 			w.Header().Set("Content-Type", "image/svg+xml;")
-			badgeParams := svgRenderer.BadgeParams{Count: count, CountBgColor: requestParams.CountBgColor, CountColor: requestParams.CountColor, Label: requestParams.Label, LabelBgColor: requestParams.LabelBgColor, LabelColor: requestParams.LabelColor}
-			if err := renderer.RenderBadge(w, badgeParams); err != nil {
+			if err := renderer.RenderBadge(
+				w,
+				svgRenderer.BadgeParams{
+					Count:        count,
+					CountBgColor: requestParams.CountBgColor,
+					CountColor:   requestParams.CountColor,
+					Label:        requestParams.Label,
+					LabelBgColor: requestParams.LabelBgColor,
+					LabelColor:   requestParams.LabelColor,
+				},
+			); err != nil {
 				writeErrorResponse(w, err)
 			}
 		}
