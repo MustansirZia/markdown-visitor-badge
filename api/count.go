@@ -25,7 +25,6 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	}
 	once.Do(func() {
 		if config, err := configProvider.NewConfigProvider().Provide(); err != nil {
-			fmt.Fprintln(os.Stderr, "config")
 			writeErrorResponse(w, err)
 		} else {
 			counter = store.NewCounter(config)
@@ -38,17 +37,13 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 			writeBadRequestResponse(w, err)
 			return
 		}
-		fmt.Fprintln(os.Stderr, "parser")
 		writeErrorResponse(w, err)
 		return
 	} else {
 		if counter == nil {
-			fmt.Fprintln(os.Stderr, "counter is nil")
-			writeErrorResponse(w, fmt.Errorf("counter is nil"))
 			return
 		}
 		if count, err := counter.IncrementAndGet(r.Context(), requestParams.Key); err != nil {
-			fmt.Fprintln(os.Stderr, "increment")
 			writeErrorResponse(w, err)
 		} else {
 			w.Header().Set("Content-Type", "image/svg+xml;")
@@ -63,7 +58,6 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 					LabelColor:   requestParams.LabelColor,
 				},
 			); err != nil {
-				fmt.Fprintln(os.Stderr, "render")
 				writeErrorResponse(w, err)
 			}
 		}
