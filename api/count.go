@@ -25,7 +25,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	}
 	once.Do(func() {
 		if config, err := configProvider.NewConfigProvider().Provide(); err != nil {
-			fmt.Fprint(os.Stderr, "config")
+			fmt.Fprintln(os.Stderr, "config")
 			writeErrorResponse(w, err)
 		} else {
 			counter = store.NewCounter(config)
@@ -38,17 +38,17 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 			writeBadRequestResponse(w, err)
 			return
 		}
-		fmt.Fprint(os.Stderr, "parser")
+		fmt.Fprintln(os.Stderr, "parser")
 		writeErrorResponse(w, err)
 		return
 	} else {
 		if counter == nil {
-			fmt.Fprint(os.Stderr, "counter is nil")
+			fmt.Fprintln(os.Stderr, "counter is nil")
 			writeErrorResponse(w, fmt.Errorf("counter is nil"))
 			return
 		}
 		if count, err := counter.IncrementAndGet(r.Context(), requestParams.Key); err != nil {
-			fmt.Fprint(os.Stderr, "increment")
+			fmt.Fprintln(os.Stderr, "increment")
 			writeErrorResponse(w, err)
 		} else {
 			w.Header().Set("Content-Type", "image/svg+xml;")
@@ -63,7 +63,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 					LabelColor:   requestParams.LabelColor,
 				},
 			); err != nil {
-				fmt.Fprint(os.Stderr, "render")
+				fmt.Fprintln(os.Stderr, "render")
 				writeErrorResponse(w, err)
 			}
 		}
@@ -73,18 +73,18 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 func writeBadRequestResponse(w http.ResponseWriter, err error) {
 	w.WriteHeader(http.StatusBadRequest)
 	w.Header().Set("Content-Type", "text/html")
-	fmt.Fprintf(w, "<h1>Bad Request/h1><br/>Details: %s", err.Error())
+	fmt.Fprintlnf(w, "<h1>Bad Request/h1><br/>Details: %s", err.Error())
 }
 
 func writeErrorResponse(w http.ResponseWriter, err error) {
-	fmt.Fprint(os.Stderr, err.Error())
+	fmt.Fprintln(os.Stderr, err.Error())
 	w.WriteHeader(http.StatusInternalServerError)
 	w.Header().Set("Content-Type", "text/html")
-	fmt.Fprintf(w, "<h1>Internal Server Error</h1><br/>Details: %s", err.Error())
+	fmt.Fprintlnf(w, "<h1>Internal Server Error</h1><br/>Details: %s", err.Error())
 }
 
 func writeNotFoundResponse(w http.ResponseWriter) {
 	w.WriteHeader(http.StatusNotFound)
 	w.Header().Set("Content-Type", "text/html")
-	fmt.Fprint(w, "<h1>Not Found</h1><br/>Details: Nothing to see here.")
+	fmt.Fprintln(w, "<h1>Not Found</h1><br/>Details: Nothing to see here.")
 }
