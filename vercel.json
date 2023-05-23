@@ -1,0 +1,9 @@
+{
+    "env": {
+      "REDIS_HOST": "@REDIS_HOST",
+      "REDIS_PORT": "@REDIS_PORT",
+      "REDIS_USERNAME": "@REDIS_USERNAME",
+      "REDIS_PASSWORD": "@REDIS_PASSWORD",
+      "REDIS_DATABASE": "@REDIS_DATABASE"
+    }
+  }
