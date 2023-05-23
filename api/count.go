@@ -67,7 +67,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 func writeBadRequestResponse(w http.ResponseWriter, err error) {
 	w.WriteHeader(http.StatusBadRequest)
 	w.Header().Set("Content-Type", "text/html")
-	fmt.Fprintf(w, "<h1>Bad Request/h1><br/>Details: %s", err.Error())
+	fmt.Fprintf(w, "<h1>Bad Request</h1><br/>Details: %s", err.Error())
 }
 
 func writeErrorResponse(w http.ResponseWriter, err error) {
