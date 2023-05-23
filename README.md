@@ -4,7 +4,7 @@
 
 ![Example](/static/2.png)
 
-> Get this embeddable visitor badge instantly for your GitHub profile or any markdown file.
+> Get this embeddable visitor badge for free for your GitHub profile or any markdown file.
 
 [![Documentation](https://godoc.org/github.com/mustansirzia/markdown-visitor-badge?status.svg)](http://godoc.org/github.com/mustansirzia/markdown-visitor-badge)
 [![Go Report Card](https://goreportcard.com/badge/github.com/MustansirZia/markdown-visitor-badge)](https://goreportcard.com/report/github.com/MustansirZia/markdown-visitor-badge)
