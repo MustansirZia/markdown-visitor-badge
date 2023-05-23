@@ -19,7 +19,6 @@ var parser requestParser.RequestParser
 
 // Handler - Handles the HTTP request.
 func Handler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(os.Stderr, r.URL.Path)
 	if (r.URL.Path != "/" && r.URL.Path != "/api/count") || r.Method != http.MethodGet {
 		writeNotFoundResponse(w)
 		return
@@ -73,6 +72,7 @@ func writeBadRequestResponse(w http.ResponseWriter, err error) {
 }
 
 func writeErrorResponse(w http.ResponseWriter, err error) {
+	fmt.Fprint(os.Stderr, err)
 	w.WriteHeader(http.StatusInternalServerError)
 	w.Header().Set("Content-Type", "text/html")
 	fmt.Fprintf(w, "<h1>Internal Server Error</h1><br/>Details: %s", err.Error())
