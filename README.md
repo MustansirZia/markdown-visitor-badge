@@ -33,9 +33,12 @@
  ![visitors](<url-from-step-4>/api/count)
 
 ```
-6. And Voila! You should be able to see the badge appear.
+6. And Voila! You should be able to see the badge appear instantly. *Since this is a global vercel function, your users should also see the badge appear almost instantly irrespective of their location on the globe*.
 
 # Customization.
 The look and feel of the badge can be customised by providing a set of query params inside the markdown snippet as described in the below picture.
 
 ![Customization](/static/3.jpeg)
+
+# License.
+MIT.
