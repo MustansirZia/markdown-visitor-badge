@@ -2,6 +2,8 @@
 
 ![Badge](/static/1.png)
 
+![Example](/static/2.png)
+
 > Get this embeddable badge instantly for your GitHub profile or any markdown file.
 
 [![Documentation](https://godoc.org/github.com/mustansirzia/markdown-visitor-badge?status.svg)](http://godoc.org/github.com/mustansirzia/markdown-visitor-badge)
