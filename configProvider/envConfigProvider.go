@@ -38,7 +38,7 @@ func NewConfigProvider() ConfigProvider {
 
 type envConfigProvider struct{}
 
-func (e *envConfigProvider) Provide() (Config, error) {
+func (e envConfigProvider) Provide() (Config, error) {
 	redisHost, err := getEnvVarOrError("REDIS_HOST")
 	if err != nil {
 		return Config{}, err
