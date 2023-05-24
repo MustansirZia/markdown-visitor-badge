@@ -43,8 +43,8 @@ The look and feel of the badge can be customised by providing a set of query par
 # Contributions and Development.
 1. Install Golang `1.20.4` if not done previously.
 2. To run the project locally, clone it in your machine.
-3. Run `go mod tidy`.
-4. Run `REDIS_HOST="localhost" REDIS_PORT="6379" go run cmd/markdown-visitor-badge/main.go` to start the http server.
+3. Then run `go mod tidy`.
+4. The project is bundled with an HTTP server as well, to start it, run `REDIS_HOST="<REDIS_HOST_URL>" REDIS_PORT="<REDIS_PORT>" go run cmd/markdown-visitor-badge/main.go`. Replace `REDIS_HOST_URL` and `REDIS_PORT` with real values.
 5. Visit `http://localhost:8080` to see your badge!
 
 
