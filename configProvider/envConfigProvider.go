@@ -38,22 +38,6 @@ func NewConfigProvider() ConfigProvider {
 
 type envConfigProvider struct{}
 
-func getEnvVarOrError(key string) (string, error) {
-	value, found := os.LookupEnv(key)
-	if !found {
-		return "", fmt.Errorf("%s key not found in environment", key)
-	}
-	return value, nil
-}
-
-func getEnvVarOrDefault(key string, defaultValue string) string {
-	value, found := os.LookupEnv(key)
-	if !found {
-		return defaultValue
-	}
-	return value
-}
-
 func (e *envConfigProvider) Provide() (Config, error) {
 	redisHost, err := getEnvVarOrError("REDIS_HOST")
 	if err != nil {
@@ -81,4 +65,20 @@ func (e *envConfigProvider) Provide() (Config, error) {
 	}
 	redisUseTLS := getEnvVarOrDefault("REDIS_USE_TLS", "false") == "true"
 	return Config{RedisHost: redisHost, RedisPort: uint32(redisPort), Port: uint32(port), RedisUsername: redisUsername, RedisPassword: redisPassword, RedisDatabase: uint32(redisDatabase), RedisUseTLS: redisUseTLS}, nil
+}
+
+func getEnvVarOrError(key string) (string, error) {
+	value, found := os.LookupEnv(key)
+	if !found {
+		return "", fmt.Errorf("%s key not found in environment", key)
+	}
+	return value, nil
+}
+
+func getEnvVarOrDefault(key string, defaultValue string) string {
+	value, found := os.LookupEnv(key)
+	if !found {
+		return defaultValue
+	}
+	return value
 }

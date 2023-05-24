@@ -22,14 +22,14 @@ type BadgeParams struct {
 	CountColor string
 }
 
-// Renderer - Interface for rendering the badge.
-type Renderer interface {
+// SvgRenderer - Interface for rendering the badge as an SVG.
+type SvgRenderer interface {
 	// RenderBadge - Writes contents of the badge into the writer.
 	RenderBadge(w io.Writer, params BadgeParams) error
 }
 
-// NewRenderer - Constructs and returns a new Renderer.
-func NewRenderer() Renderer {
+// NewSvgRenderer - Constructs and returns a new SVG Renderer.
+func NewSvgRenderer() SvgRenderer {
 	return &templateSvgRenderer{}
 }
 

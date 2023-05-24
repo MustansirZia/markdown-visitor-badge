@@ -15,18 +15,6 @@ type Counter interface {
 	IncrementAndGet(ctx context.Context, key string) (uint64, error)
 }
 
-type redisBasedCounter struct {
-	redisClient *redis.Client
-}
-
-func (c *redisBasedCounter) IncrementAndGet(ctx context.Context, key string) (uint64, error) {
-	if value, err := c.redisClient.Incr(ctx, key).Result(); err != nil {
-		return 0, err
-	} else {
-		return uint64(value), nil
-	}
-}
-
 // NewCounter - Constructs and returns a new Counter.
 func NewCounter(config configProvider.Config) Counter {
 	var tlsConfig *tls.Config
@@ -42,4 +30,16 @@ func NewCounter(config configProvider.Config) Counter {
 		PoolSize:  1,
 	})
 	return &redisBasedCounter{redisClient: redisClient}
+}
+
+type redisBasedCounter struct {
+	redisClient *redis.Client
+}
+
+func (c *redisBasedCounter) IncrementAndGet(ctx context.Context, key string) (uint64, error) {
+	if value, err := c.redisClient.Incr(ctx, key).Result(); err != nil {
+		return 0, err
+	} else {
+		return uint64(value), nil
+	}
 }

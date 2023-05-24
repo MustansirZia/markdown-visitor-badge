@@ -14,7 +14,7 @@ import (
 
 var counter store.Counter
 var once sync.Once
-var renderer svgRenderer.Renderer
+var renderer svgRenderer.SvgRenderer
 var parser requestParser.RequestParser
 
 // Handler - Handles the HTTP request.
@@ -29,7 +29,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 		} else {
 			counter = store.NewCounter(config)
 		}
-		renderer = svgRenderer.NewRenderer()
+		renderer = svgRenderer.NewSvgRenderer()
 		parser = requestParser.NewParser()
 	})
 	if requestParams, err := parser.Parse(r); err != nil {

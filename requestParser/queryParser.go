@@ -34,12 +34,12 @@ func NewParser() RequestParser {
 	return queryParser{}
 }
 
-type queryParser struct{}
-
 var validKeys = []string{"github_visitors"}
 
 // ErrInvalidKey - If an invalid value is passed for the key parameter.
 var ErrInvalidKey = errors.New("this key is not supported")
+
+type queryParser struct{}
 
 func (p queryParser) Parse(r *http.Request) (RequestParams, error) {
 	queryParams := r.URL.Query()
