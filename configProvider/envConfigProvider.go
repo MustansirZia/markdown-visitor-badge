@@ -33,10 +33,10 @@ type ConfigProvider interface {
 
 // NewConfigProvider - Constructs and returns a new ConfigProvider.
 func NewConfigProvider() ConfigProvider {
-	return &envConfig{}
+	return &envConfigProvider{}
 }
 
-type envConfig struct{}
+type envConfigProvider struct{}
 
 func getEnvVarOrError(key string) (string, error) {
 	value, found := os.LookupEnv(key)
@@ -54,7 +54,7 @@ func getEnvVarOrDefault(key string, defaultValue string) string {
 	return value
 }
 
-func (e *envConfig) Provide() (Config, error) {
+func (e *envConfigProvider) Provide() (Config, error) {
 	redisHost, err := getEnvVarOrError("REDIS_HOST")
 	if err != nil {
 		return Config{}, err

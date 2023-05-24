@@ -30,15 +30,15 @@ type Renderer interface {
 
 // NewRenderer - Constructs and returns a new Renderer.
 func NewRenderer() Renderer {
-	return &templateBasedRenderer{}
+	return &templateSvgRenderer{}
 }
 
-type templateBasedRenderer struct {
+type templateSvgRenderer struct {
 	svgTemplate *template.Template
 	once        sync.Once
 }
 
-func (t *templateBasedRenderer) RenderBadge(w io.Writer, params BadgeParams) error {
+func (t *templateSvgRenderer) RenderBadge(w io.Writer, params BadgeParams) error {
 	t.once.Do(func() {
 		t.svgTemplate = template.Must(template.New("templateSvg").Parse(`
 			<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="138" height="28" role="img" aria-label="visitors: 21">
