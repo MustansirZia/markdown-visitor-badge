@@ -33,12 +33,21 @@
  ![visitors](<url-from-step-4>/api/count)
 
 ```
-6. And Voila! You should be able to see the badge appear instantly. *Since this is a global vercel function, your users should also see the badge appear almost instantly irrespective of their location on the globe*.
+6. And Voila! You should be able to see the badge appear instantly. *Since this is a global edge function, your users should also see the badge appear almost instantly irrespective of their location on the globe. The process is fast also because the count of visitors is stored in a distributed in-memory cache*.
 
 # Customization.
 The look and feel of the badge can be customised by providing a set of query params inside the markdown snippet as described in the below picture.
 
 ![Customization](/static/3.jpeg)
 
+# Contributions and Development.
+1. Install Golang `1.20.4` if not done previously.
+2. To run the project locally, clone it in your machine.
+3. Run `go mod tidy`.
+4. Run `REDIS_HOST="localhost" REDIS_PORT="6379" go run cmd/markdown-visitor-badge/main.go` to start the http server.
+5. Visit `http://localhost:8080` to see your badge!
+
+
 # License.
 MIT.
+
