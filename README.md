@@ -46,9 +46,9 @@ The look and feel of the badge can be customised by providing a set of query par
 3. Then run `go mod tidy`.
 4. The project is bundled with an HTTP server as well, to start it, run 
 ```sh
-# Replace `REDIS_HOST_URL` and `REDIS_PORT` with real values.
+# Replace "REDIS_HOST_URL" and "REDIS_PORT" with real values.
 
-REDIS_HOST="<REDIS_HOST_URL>" REDIS_PORT="<REDIS_PORT>" go run cmd/markdown-visitor-badge/main.go
+REDIS_HOST="<REDIS_HOST_URL>" REDIS_PORT=<REDIS_PORT> go run cmd/markdown-visitor-badge/main.go
 
 ```
 5. Visit `http://localhost:8080` to see your badge!
